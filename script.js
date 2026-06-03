@@ -90,3 +90,244 @@ const resumeObserver = new IntersectionObserver(
 );
 
 resumeObserver.observe(resumeSection);
+
+/* ======================
+   SNAKE GAME
+====================== */
+document.addEventListener("DOMContentLoaded", () => {
+
+    const snakeTrigger =
+        document.getElementById("snakeTrigger");
+
+    const snakeModal =
+        document.getElementById("snakeModal");
+
+    const canvas =
+        document.getElementById("snakeCanvas");
+
+    if(!canvas){
+        console.error(
+            "snakeCanvas not found"
+        );
+        return;
+    }
+
+    const ctx = canvas.getContext("2d");
+
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const gameOverScreen = document.getElementById("gameOverScreen");
+    const finalScore = document.getElementById("finalScore");
+    const restartButton = document.getElementById("restartGame");
+
+    const tileSize = 20;
+    const tileCount = 30;
+
+    let snake;
+    let food;
+    let velocityX;
+    let velocityY;
+    let score;
+    let interval;
+    let gameRunning = false;
+
+    function resetGame() {
+
+        snake = [
+            { x: 15, y: 15 }
+        ];
+
+        velocityX = 1;
+        velocityY = 0;
+
+        score = 0;
+
+        food = randomFood();
+
+        scoreDisplay.textContent = `SCORE: ${score}`;
+
+        gameOverScreen.classList.remove("show");
+    }
+
+    function randomFood() {
+
+        return {
+            x: Math.floor(Math.random() * tileCount),
+            y: Math.floor(Math.random() * tileCount)
+        };
+    }
+
+    function drawGame() {
+
+        ctx.fillStyle = "#111";
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        ctx.fillStyle = "#fff";
+
+        snake.forEach(part => {
+
+            ctx.fillRect(
+                part.x * tileSize,
+                part.y * tileSize,
+                tileSize - 2,
+                tileSize - 2
+            );
+        });
+
+        ctx.fillRect(
+            food.x * tileSize,
+            food.y * tileSize,
+            tileSize - 2,
+            tileSize - 2
+        );
+    }
+
+    function updateGame() {
+
+        const head = {
+            x: snake[0].x + velocityX,
+            y: snake[0].y + velocityY
+        };
+
+        if (
+            head.x < 0 ||
+            head.y < 0 ||
+            head.x >= tileCount ||
+            head.y >= tileCount
+        ) {
+            gameOver();
+            return;
+        }
+
+        for (let i = 0; i < snake.length; i++) {
+
+            if (
+                head.x === snake[i].x &&
+                head.y === snake[i].y
+            ) {
+                gameOver();
+                return;
+            }
+        }
+
+        snake.unshift(head);
+
+        if (
+            head.x === food.x &&
+            head.y === food.y
+        ) {
+
+            score++;
+
+            scoreDisplay.textContent =
+                `SCORE: ${score}`;
+
+            food = randomFood();
+
+        } else {
+
+            snake.pop();
+        }
+
+        drawGame();
+    }
+
+    function gameOver() {
+
+        clearInterval(interval);
+
+        gameRunning = false;
+
+        finalScore.textContent =
+            `FINAL SCORE: ${score}`;
+
+        gameOverScreen.classList.add("show");
+    }
+
+    function startGame() {
+
+        clearInterval(interval);
+
+        resetGame();
+
+        drawGame();
+
+        interval = setInterval(
+            updateGame,
+            120
+        );
+
+        gameRunning = true;
+    }
+
+    snakeTrigger.addEventListener("click", () => {
+
+        snakeModal.classList.add("active");
+
+        startGame();
+    });
+
+    restartButton.addEventListener(
+        "click",
+        startGame
+    );
+
+    document.addEventListener("keydown", e => {
+
+        if (e.key === "Escape") {
+
+            snakeModal.classList.remove("active");
+
+            clearInterval(interval);
+
+            gameRunning = false;
+
+            return;
+        }
+
+        if (!gameRunning) return;
+
+        switch (e.key.toLowerCase()) {
+
+            case "arrowup":
+            case "w":
+
+                if (velocityY !== 1) {
+                    velocityX = 0;
+                    velocityY = -1;
+                }
+                break;
+
+            case "arrowdown":
+            case "s":
+
+                if (velocityY !== -1) {
+                    velocityX = 0;
+                    velocityY = 1;
+                }
+                break;
+
+            case "arrowleft":
+            case "a":
+
+                if (velocityX !== 1) {
+                    velocityX = -1;
+                    velocityY = 0;
+                }
+                break;
+
+            case "arrowright":
+            case "d":
+
+                if (velocityX !== -1) {
+                    velocityX = 1;
+                    velocityY = 0;
+                }
+                break;
+        }
+    });
+});

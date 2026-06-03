@@ -52,11 +52,11 @@ main{
     border:1px dashed var(--dash);
 }
 
-.logo{
+/* .logo{
     font-size:14px;
     font-weight:800;
     letter-spacing:.15em;
-}
+} */
 
 .nav-links{
     display:flex;
@@ -534,22 +534,501 @@ main{
 }
 
 /* Signature */
+.cv-row{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:30px;
+
+    margin-top:35px;
+
+    flex-wrap:wrap;
+}
+
 .signature{
 
-    display:block;
+    height:55px;
+    filter:invert(1);
+    width:auto;
 
-    width:220px;
-
-    max-width:80%;
-
-    margin:35px auto;
-
-    opacity:.95;
+    object-fit:contain;
 
     transition:.3s ease;
-    filter:invert(1);
 }
 
 .signature:hover{
-    transform:translateY(-2px);
+
+    transform:translateY(-3px);
 }
+
+/* ======================
+   SNAKE GAME
+====================== */
+.snake-modal{
+
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(255,255,255,.95);
+
+    z-index:999999;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s ease;
+}
+
+.snake-modal.active{
+
+    opacity:1;
+    visibility:visible;
+}
+
+.snake-container{
+
+    position:relative;
+
+    width:min(700px,90vw);
+
+    padding:20px;
+
+    background:#111;
+
+    border:1px dashed #fff;
+}
+
+.snake-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:15px;
+}
+
+.snake-label{
+
+    color:#888;
+
+    font-size:11px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+#scoreDisplay{
+
+    color:#fff;
+
+    font-size:11px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+#snakeCanvas{
+
+    width:100%;
+    height:auto;
+
+    display:block;
+
+    background:#111;
+
+    border:1px dashed #fff;
+}
+
+.game-over{
+
+    position:absolute;
+    inset:0;
+
+    display:none;
+
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(17,17,17,.97);
+}
+
+.game-over.show{
+    display:flex;
+}
+
+.game-over h2{
+
+    color:#fff;
+
+    font-size:48px;
+
+    font-weight:800;
+
+    margin-bottom:15px;
+}
+
+.game-over p{
+
+    color:#fff;
+
+    margin-bottom:20px;
+
+    letter-spacing:.1em;
+}
+
+.snake-btn{
+
+    background:transparent;
+
+    color:#fff;
+
+    border:1px dashed #fff;
+
+    padding:14px 28px;
+
+    cursor:pointer;
+
+    text-transform:uppercase;
+
+    letter-spacing:.1em;
+
+    transition:.3s ease;
+}
+
+.snake-btn:hover{
+
+    background:#fff;
+
+    color:#111;
+}
+
+.logo{
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    cursor:pointer;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    transition:.3s ease;
+
+    animation:logoBreath 4s infinite ease-in-out;
+}
+
+.snake-hint{
+
+    position:absolute;
+
+    top:-12px;
+    right:-18px;
+
+    font-size:14px;
+
+    opacity:0;
+
+    transition:.3s ease;
+}
+
+.logo:hover{
+
+    transform:scale(1.08);
+}
+
+.logo:hover .snake-hint{
+
+    opacity:1;
+
+    animation:snakeFloat 1.2s infinite ease-in-out;
+}
+
+@keyframes snakeFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-4px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+.logo:hover .snake-hint{
+
+    opacity:1;
+
+    transform:
+        translateY(0)
+        rotate(0deg);
+}
+
+@keyframes logoBreath{
+
+    0%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.65;
+    }
+
+    100%{
+        opacity:1;
+    }
+}
+
+.secret-dot{
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#c0c0c0;
+
+    animation:secretPulse 3s infinite;
+}
+
+@keyframes secretPulse{
+
+    0%{
+        opacity:.2;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:.2;
+    }
+}
+
+.easter-tooltip{
+
+    position:absolute;
+
+    top:120%;
+    left:0;
+
+    background:#111;
+    color:#fff;
+
+    border:1px dashed #fff;
+
+    padding:6px 10px;
+
+    font-size:10px;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    opacity:0;
+
+    transform:translateY(5px);
+
+    transition:.3s ease;
+
+    white-space:nowrap;
+}
+
+.logo:hover .easter-tooltip{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+    
+/*
+.hero{
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-game{
+
+    display:none;
+
+    width:100%;
+    height:100%;
+}
+
+.hero-game.active{
+
+    display:block;
+}
+
+.hero.game-mode{
+
+    background:#111;
+    border:1px dashed #fff;
+}
+
+#snakeCanvas{
+
+    width:100%;
+    height:500px;
+
+    display:block;
+
+    border:1px dashed #fff;
+
+    background:#111;
+}
+
+.game-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+
+    color:#fff;
+
+    font-size:11px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+#heroContent{
+    display:flex;
+    flex-direction:column;
+}
+
+.hero-game{
+    display:none;
+}
+
+.hero-game.active{
+    display:block;
+}
+
+.hero.game-mode{
+
+    background:#111;
+
+    border:1px dashed #fff;
+}
+
+.hero.game-mode .section-label,
+.hero.game-mode h1,
+.hero.game-mode .hero-roles{
+    display:none;
+}
+
+.game-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+    color:#fff;
+
+    font-size:11px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+#snakeCanvas{
+
+    width:100%;
+
+    height:500px;
+
+    display:block;
+
+    background:#111;
+
+    border:1px dashed #fff;
+}
+
+.game-over{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    display:none;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:20px;
+
+    color:#fff;
+
+    z-index:10;
+}
+
+.game-over.show{
+    display:flex;
+}
+
+.game-over h2{
+
+    font-size:48px;
+
+    font-weight:800;
+}
+
+.snake-btn{
+
+    background:transparent;
+
+    color:#fff;
+
+    border:1px dashed #fff;
+
+    padding:14px 28px;
+
+    cursor:pointer;
+
+    text-transform:uppercase;
+
+    transition:.3s ease;
+}
+
+.snake-btn:hover{
+
+    background:#fff;
+
+    color:#111;
+}*/

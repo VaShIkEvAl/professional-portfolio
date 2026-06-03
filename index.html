@@ -16,7 +16,15 @@
     <nav class="navbar">
         <span class="nav-dot pulse-dot">•</span>
 
-        <div class="logo">YN</div>
+        <div class="logo" id="snakeTrigger">
+            <span class="secret-dot"></span>
+            KV
+            <span class="snake-hint">🐍</span>
+            <span class="secret-dot"></span>
+            <span class="easter-tooltip">
+                Secret Game
+            </span>
+        </div>
 
         <div class="nav-links">
             <a href="#hero">HOME</a>
@@ -32,16 +40,26 @@
     <main>
 
         <!-- HERO -->
-        <section id="hero" class="hero fade-in">
-            <p class="section-label">PORTFOLIO — 2025</p>
+        <section id="hero" class="hero">
+            <div id="heroContent">
 
-            <h1>KEVAL VASHI</h1>
+                <p class="section-label">
+                    PORTFOLIO — 2025
+                </p>
 
-            <div class="hero-roles">
-                <span id="changing-role">Software Engineer</span>
+                <h1>KEVAL VASHI</h1>
+
+                <div class="hero-roles">
+                    <span id="changing-role">
+                        Software Engineer
+                    </span>
+                </div>
+
+                <a href="#projects" class="primary-btn">
+                    VIEW MY WORK
+                </a>
+
             </div>
-
-            <a href="#projects" class="primary-btn">VIEW MY WORK</a>
         </section>
 
         <!-- SKILLS -->
@@ -202,15 +220,19 @@
             product management and machine learning experience.
         </p>
 
-        <img
-            src="Signature.jpeg"
-            alt="Keval Vashi Signature"
-            class="signature"
-        >
+        <div class="cv-row">
 
-        <a href="https://drive.google.com/file/d/1rD5qWELAA2xXbe8VeC4yp6zVXSZpAZIL/view?usp=sharing" download class="cv-btn" target="_blank">
-            DOWNLOAD CV
-        </a>
+            <a href="https://drive.google.com/file/d/1rD5qWELAA2xXbe8VeC4yp6zVXSZpAZIL/view?usp=sharing" download class="cv-btn">
+                DOWNLOAD CV
+            </a>
+
+            <img
+                src="Signature-removebg.png"
+                alt="Keval Vashi Signature"
+                class="signature"
+            >
+
+        </div>
 
     </div>
 
@@ -250,5 +272,49 @@
 
     <script src="script.js"></script>
 
+    <div id="snakeModal" class="snake-modal">
+        <div class="snake-container">
+
+            <div class="snake-header">
+
+                <span class="snake-label">
+                    PRESS ESC TO CLOSE
+                </span>
+
+                <span id="scoreDisplay">
+                    SCORE: 0
+                </span>
+
+            </div>
+
+            <canvas
+                id="snakeCanvas"
+                width="600"
+                height="600">
+            </canvas>
+
+            <div id="gameOverScreen" class="game-over">
+
+                <h2>
+                    GAME OVER
+                </h2>
+
+                <p id="finalScore">
+                    FINAL SCORE: 0
+                </p>
+
+                <button
+                    id="restartGame"
+                    class="snake-btn">
+
+                    RESTART
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 </body>
 </html>
