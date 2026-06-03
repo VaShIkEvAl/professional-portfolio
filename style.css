@@ -1,0 +1,555 @@
+:root{
+    --bg:#ffffff;
+    --text:#111111;
+    --muted:#888888;
+    --dash:#cccccc;
+    --card:#bbbbbb;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding:12px;
+    overflow-x:hidden;
+}
+
+main{
+    width:100%;
+    max-width:1400px;
+    margin:0 auto;
+}
+
+/* ======================
+   NAVBAR
+====================== */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:20px 28px;
+    margin-bottom:20px;
+
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(8px);
+
+    border:1px dashed var(--dash);
+}
+
+.logo{
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.15em;
+}
+
+.nav-links{
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    transition:.25s ease;
+}
+
+.nav-links a:hover{
+    opacity:.6;
+}
+
+.nav-dot{
+    color:#aaaaaa;
+    font-size:18px;
+}
+
+.pulse-dot{
+    animation:pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot{
+    0%{
+        opacity:.3;
+        transform:scale(.8);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.3);
+    }
+    100%{
+        opacity:.3;
+        transform:scale(.8);
+    }
+}
+
+/* ======================
+   HERO
+====================== */
+
+.hero{
+    min-height:70vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    gap:24px;
+
+    padding:60px;
+
+    border:1px dashed var(--dash);
+}
+
+.section-label{
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--muted);
+}
+
+.hero h1{
+    font-size:clamp(56px,9vw,110px);
+    font-weight:800;
+    line-height:.95;
+    letter-spacing:-0.04em;
+}
+
+.hero-roles{
+    min-height:40px;
+    display:flex;
+    align-items:center;
+}
+
+#changing-role{
+    font-size:22px;
+    font-weight:500;
+    transition:.4s ease;
+}
+
+.role-enter{
+    opacity:0;
+    transform:translateY(15px);
+}
+
+.primary-btn,
+.outline-btn,
+.contact-btn,
+.cv-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:fit-content;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border:1px dashed var(--card);
+
+    background:#fff;
+    color:#111;
+
+    cursor:pointer;
+
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+
+    transition:.3s ease;
+}
+
+.primary-btn{
+    background:#111;
+    color:#fff;
+}
+
+.primary-btn:hover,
+.outline-btn:hover,
+.contact-btn:hover{
+    background:#111;
+    color:#fff;
+}
+
+/* ======================
+   SECTIONS
+====================== */
+
+.section{
+    padding:90px 0;
+}
+
+.divider{
+    border-top:1px dashed var(--dash);
+    margin-bottom:40px;
+}
+
+/* ======================
+   SKILLS
+====================== */
+
+.skills-grid{
+    margin-top:35px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.skill-card{
+    border:1px dashed var(--card);
+
+    padding:36px;
+
+    position:relative;
+
+    transition:.35s ease;
+}
+
+.skill-card::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:2px;
+
+    background:#111;
+
+    transform:scaleX(0);
+    transform-origin:left;
+
+    transition:.4s ease;
+}
+
+.skill-card:hover{
+    transform:translateY(-8px);
+}
+
+.skill-card:hover::before{
+    transform:scaleX(1);
+}
+
+.card-label{
+    display:block;
+
+    margin-bottom:24px;
+
+    color:var(--muted);
+
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+}
+
+.skill-card ul{
+    list-style:none;
+}
+
+.skill-card li{
+    padding:12px 0;
+    border-bottom:1px dashed #dddddd;
+    font-size:14px;
+}
+
+.skill-card li:last-child{
+    border-bottom:none;
+}
+
+/* ======================
+   PROJECTS
+====================== */
+
+.projects-grid{
+    margin-top:35px;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+}
+
+.project-card{
+    border:1px dashed var(--card);
+
+    padding:40px;
+
+    position:relative;
+
+    transition:.35s ease;
+}
+
+.project-card:hover{
+    transform:translateY(-8px);
+    border-color:#111;
+}
+
+.project-card::after{
+    content:"↗";
+
+    position:absolute;
+    top:25px;
+    right:25px;
+
+    color:#cccccc;
+    font-size:20px;
+
+    transition:.3s ease;
+}
+
+.project-card:hover::after{
+    color:#111;
+    transform:translate(4px,-4px);
+}
+
+.project-number{
+    color:#aaaaaa;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.2em;
+}
+
+.project-card h3{
+    margin:15px 0;
+
+    font-size:30px;
+    font-weight:700;
+    line-height:1.1;
+}
+
+.project-card p{
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.tech-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+
+    margin-bottom:24px;
+}
+
+.tech-tags span{
+    border:1px dashed var(--dash);
+
+    padding:8px 12px;
+
+    color:var(--muted);
+
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.project-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+/* ======================
+   RESUME
+====================== */
+
+.resume-box{
+    width:100%;
+
+    background:#111;
+    color:#fff;
+
+    border:1px dashed #111;
+
+    text-align:center;
+
+    padding:100px 60px;
+}
+
+.resume-heading{
+    font-size:clamp(36px,5vw,72px);
+    font-weight:800;
+    line-height:1;
+    letter-spacing:-0.04em;
+
+    margin-bottom:24px;
+}
+
+.resume-box p{
+    max-width:700px;
+    margin:0 auto 32px;
+
+    color:#cccccc;
+
+    line-height:1.8;
+}
+
+.cv-btn{
+    background:#fff;
+    color:#111;
+
+    border:1px dashed #fff;
+}
+
+.cv-btn:hover{
+    background:#111;
+    color:#fff;
+}
+
+/* ======================
+   CONTACT
+====================== */
+
+.contact-title{
+    font-size:clamp(42px,6vw,72px);
+    font-weight:800;
+    letter-spacing:-0.03em;
+
+    margin:20px 0 30px;
+}
+
+.contact-buttons{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+/* ======================
+   SCROLL ANIMATION
+====================== */
+
+.fade-in{
+    opacity:0;
+    transform:translateY(40px);
+
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.fade-in.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media(max-width:1024px){
+
+    .skills-grid{
+        grid-template-columns:1fr;
+    }
+
+    .projects-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:50px;
+    }
+}
+
+@media(max-width:768px){
+
+    body{
+        padding:10px;
+    }
+
+    .navbar{
+        flex-direction:column;
+        gap:18px;
+    }
+
+    .nav-links{
+        justify-content:center;
+        gap:18px;
+    }
+
+    .hero{
+        min-height:60vh;
+        padding:40px 24px;
+    }
+
+    .hero h1{
+        font-size:54px;
+    }
+
+    .resume-box{
+        padding:50px 24px;
+    }
+
+    .contact-buttons{
+        flex-direction:column;
+    }
+
+    .contact-btn,
+    .cv-btn{
+        width:100%;
+    }
+}
+
+@media(max-width:480px){
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .section-label{
+        font-size:14px;
+    }
+
+    .project-card,
+    .skill-card{
+        padding:24px;
+    }
+
+    .project-card h3{
+        font-size:24px;
+    }
+}
+
+/* Signature */
+.signature{
+
+    display:block;
+
+    width:220px;
+
+    max-width:80%;
+
+    margin:35px auto;
+
+    opacity:.95;
+
+    transition:.3s ease;
+    filter:invert(1);
+}
+
+.signature:hover{
+    transform:translateY(-2px);
+}
