@@ -118,6 +118,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameOverScreen = document.getElementById("gameOverScreen");
     const finalScore = document.getElementById("finalScore");
     const restartButton = document.getElementById("restartGame");
+    const closeGameBtn =document.getElementById("closeGameBtn");
+
+    const upBtn =document.getElementById("upBtn");
+
+    const downBtn =document.getElementById("downBtn");
+
+    const leftBtn =document.getElementById("leftBtn");
+
+    const rightBtn =document.getElementById("rightBtn");
 
     const tileSize = 20;
     const tileCount = 30;
@@ -276,6 +285,53 @@ document.addEventListener("DOMContentLoaded", () => {
         startGame
     );
 
+    closeGameBtn.addEventListener(
+        "click",
+        () => {
+
+            snakeModal.classList.remove("active");
+
+            clearInterval(interval);
+
+            gameRunning = false;
+        }
+    );
+
+    upBtn.addEventListener("click",()=>{
+
+        if(velocityY!==1){
+
+            velocityX=0;
+            velocityY=-1;
+        }
+    });
+
+    downBtn.addEventListener("click",()=>{
+
+        if(velocityY!==-1){
+
+            velocityX=0;
+            velocityY=1;
+        }
+    });
+
+    leftBtn.addEventListener("click",()=>{
+
+        if(velocityX!==1){
+
+            velocityX=-1;
+            velocityY=0;
+        }
+    });
+
+    rightBtn.addEventListener("click",()=>{
+
+        if(velocityX!==-1){
+
+            velocityX=1;
+            velocityY=0;
+        }
+    });
     document.addEventListener("keydown", e => {
 
         if (e.key === "Escape") {

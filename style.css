@@ -863,153 +863,8 @@ main{
 
     transform:translateY(0);
 }
-    
-/*
-.hero{
-    position:relative;
-    overflow:hidden;
-}
 
-.hero-game{
-
-    display:none;
-
-    width:100%;
-    height:100%;
-}
-
-.hero-game.active{
-
-    display:block;
-}
-
-.hero.game-mode{
-
-    background:#111;
-    border:1px dashed #fff;
-}
-
-#snakeCanvas{
-
-    width:100%;
-    height:500px;
-
-    display:block;
-
-    border:1px dashed #fff;
-
-    background:#111;
-}
-
-.game-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:15px;
-
-    color:#fff;
-
-    font-size:11px;
-
-    letter-spacing:.15em;
-
-    text-transform:uppercase;
-}
-
-#heroContent{
-    display:flex;
-    flex-direction:column;
-}
-
-.hero-game{
-    display:none;
-}
-
-.hero-game.active{
-    display:block;
-}
-
-.hero.game-mode{
-
-    background:#111;
-
-    border:1px dashed #fff;
-}
-
-.hero.game-mode .section-label,
-.hero.game-mode h1,
-.hero.game-mode .hero-roles{
-    display:none;
-}
-
-.game-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:15px;
-
-    color:#fff;
-
-    font-size:11px;
-
-    letter-spacing:.15em;
-
-    text-transform:uppercase;
-}
-
-#snakeCanvas{
-
-    width:100%;
-
-    height:500px;
-
-    display:block;
-
-    background:#111;
-
-    border:1px dashed #fff;
-}
-
-.game-over{
-
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    display:none;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:20px;
-
-    color:#fff;
-
-    z-index:10;
-}
-
-.game-over.show{
-    display:flex;
-}
-
-.game-over h2{
-
-    font-size:48px;
-
-    font-weight:800;
-}
-
-.snake-btn{
+.close-game-btn{
 
     background:transparent;
 
@@ -1017,18 +872,61 @@ main{
 
     border:1px dashed #fff;
 
-    padding:14px 28px;
+    padding:8px 14px;
 
     cursor:pointer;
 
-    text-transform:uppercase;
+    font-size:11px;
 
-    transition:.3s ease;
+    letter-spacing:.1em;
+
+    text-transform:uppercase;
 }
 
-.snake-btn:hover{
+.mobile-controls{
 
-    background:#fff;
+    display:none;
 
-    color:#111;
-}*/
+    margin-top:20px;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.middle-controls{
+
+    display:flex;
+
+    gap:10px;
+}
+
+.mobile-controls button{
+
+    width:60px;
+
+    height:60px;
+
+    background:#111;
+
+    color:#fff;
+
+    border:1px dashed #fff;
+
+    font-size:24px;
+
+    cursor:pointer;
+}
+
+@media(max-width:1024px){
+
+    .mobile-controls{
+        display:flex;
+    }
+
+    .snake-container{
+        width:95vw;
+    }
+}
