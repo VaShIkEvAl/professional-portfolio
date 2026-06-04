@@ -16,6 +16,14 @@ html{
     scroll-behavior:smooth;
 }
 
+body.dark{
+    --bg:#111111;
+    --text:#ffffff;
+    --muted:#aaaaaa;
+    --dash:#444444;
+    --card:#555555;
+}
+
 body{
     font-family:'Inter',sans-serif;
     background:var(--bg);
@@ -46,7 +54,8 @@ main{
     padding:20px 28px;
     margin-bottom:20px;
 
-    background:rgba(255,255,255,.95);
+    background:var(--bg);
+
     backdrop-filter:blur(8px);
 
     border:1px dashed var(--dash);
@@ -237,9 +246,10 @@ main{
     width:100%;
     height:2px;
 
-    background:#111;
+    background:var(--text);
 
     transform:scaleX(0);
+    
     transform-origin:left;
 
     transition:.4s ease;
@@ -284,6 +294,12 @@ main{
    PROJECTS
 ====================== */
 
+.project-arrow{
+    font-size:18px;
+    color:#ccc;
+    font-family:'Inter',sans-serif;
+}
+
 .projects-grid{
     margin-top:35px;
 
@@ -304,7 +320,7 @@ main{
 
 .project-card:hover{
     transform:translateY(-8px);
-    border-color:#111;
+    border-color:var(--text);
 }
 
 .project-card::after{
@@ -321,7 +337,7 @@ main{
 }
 
 .project-card:hover::after{
-    color:#111;
+    color:var(--text);
     transform:translate(4px,-4px);
 }
 
@@ -379,8 +395,9 @@ main{
 .resume-box{
     width:100%;
 
-    background:#111;
-    color:#fff;
+    background:var(--text);
+
+    color:var(--bg);
 
     border:1px dashed #111;
 
@@ -408,15 +425,21 @@ main{
 }
 
 .cv-btn{
-    background:#fff;
-    color:#111;
 
-    border:1px dashed #fff;
+    background:#ffffff;
+
+    color:#111111;
+
+    border:1px dashed #111111;
 }
 
 .cv-btn:hover{
-    background:#111;
-    color:#fff;
+
+    background:transparent;
+
+    color:#ffffff;
+
+    border:1px dashed #ffffff;
 }
 
 /* ======================
@@ -435,6 +458,60 @@ main{
     display:flex;
     gap:16px;
     flex-wrap:wrap;
+}
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+
+    margin-top:40px;
+}
+
+.contact-card{
+
+    border:1px dashed var(--dash);
+
+    padding:24px;
+
+    transition:.3s ease;
+}
+
+.contact-card:hover{
+
+    transform:translateY(-5px);
+}
+
+.contact-label{
+
+    display:block;
+
+    margin-bottom:12px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.contact-card a{
+
+    color:var(--text);
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    word-break:break-word;
 }
 
 /* ======================
@@ -481,13 +558,41 @@ main{
     }
 
     .navbar{
+
+        padding:16px;
+
+        gap:12px;
+
         flex-direction:column;
-        gap:18px;
+    }
+
+    .logo{
+
+        font-size:20px;
     }
 
     .nav-links{
+
+        display:grid;
+
+        grid-template-columns:
+            repeat(3,auto);
+
         justify-content:center;
-        gap:18px;
+
+        gap:12px 18px;
+    }
+
+    .nav-links a{
+
+        font-size:11px;
+
+        letter-spacing:.08em;
+    }
+
+    .nav-dot{
+
+        display:none;
     }
 
     .hero{
@@ -552,12 +657,26 @@ main{
 .signature{
 
     height:55px;
-    filter:invert(1);
+
     width:auto;
 
     object-fit:contain;
 
     transition:.3s ease;
+}
+
+/* Light Theme */
+
+body:not(.dark) .signature{
+
+    filter:invert(1);
+}
+
+/* Dark Theme */
+
+body.dark .signature{
+
+    filter:none;
 }
 
 .signature:hover{
@@ -929,4 +1048,221 @@ main{
     .snake-container{
         width:95vw;
     }
+}
+
+/* Toggle */
+.theme-toggle{
+
+    background:none;
+
+    border:1px dashed var(--dash);
+
+    color:var(--text);
+
+    width:40px;
+    height:40px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s ease;
+}
+
+.theme-toggle:hover{
+
+    background:var(--text);
+    color:var(--bg);
+}
+
+.nav-links a,
+.logo,
+.theme-toggle{
+
+    color:var(--text);
+}
+
+.contact-card,
+.skill-card,
+.project-card{
+
+    background:var(--bg);
+}
+
+body.dark .navbar,
+body.dark .skill-card,
+body.dark .project-card,
+body.dark .contact-card{
+
+    background:var(--bg);
+}
+
+body.dark .primary-btn:hover{
+
+    background:#ffffff;
+
+    color:#111111;
+
+    border-color:#ffffff;
+}
+
+body.dark .skill-card::before{
+
+    background:#fff;
+}
+
+body.dark .cv-btn{
+
+    background:#ffffff;
+
+    color:#111111;
+
+    border:1px dashed #111111;
+}
+
+body.dark .cv-btn:hover{
+
+    background:#111111;
+
+    color:#ffffff;
+
+    border:1px dashed #111111;
+}
+
+/* =====================================
+   Easter Egg 2 — Idle Cursor
+===================================== */
+
+body.idle,
+body.idle *{
+
+    cursor:none !important;
+}
+
+#idle-cursor{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:30px;
+
+    z-index:999999999;
+
+    display:none;
+
+    pointer-events:none;
+
+    background:#111111;
+
+    color:#ffffff;
+
+    border:1px dashed #555555;
+
+    padding:8px 12px;
+
+    font-family:'Inter',sans-serif;
+
+    font-size:12px;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    animation:blink .8s infinite;
+}
+
+body.idle #idle-cursor{
+    display:block;
+}
+
+@keyframes blink{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:0;
+    }
+}
+
+#idle-cursor{
+
+    transform:
+        translate(-50%,-50%);
+}
+
+body.idle,
+body.idle *,
+body.idle *::before,
+body.idle *::after{
+
+    cursor:none !important;
+}
+
+/* =====================================
+   Easter Egg 3 — Late Night Toast
+===================================== */
+
+#night-toast{
+
+    position:fixed;
+
+    left:50%;
+    bottom:24px;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    opacity:0;
+
+    z-index:999999;
+
+    background:#111;
+
+    color:#fff;
+
+    border:1px dashed #555;
+
+    padding:10px 20px;
+
+    font-size:12px;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    font-family:'Inter',sans-serif;
+
+    transition:all .4s ease;
+
+    pointer-events:none;
+}
+
+#night-toast.show{
+
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+body.dark #idle-cursor{
+
+    background:#ffffff;
+
+    color:#111111;
+
+    border:1px dashed #555555;
+}
+
+body.idle a,
+body.idle button,
+body.idle .project-card,
+body.idle .skill-card{
+
+    cursor:none !important;
 }

@@ -94,6 +94,44 @@ resumeObserver.observe(resumeSection);
 /* ======================
    SNAKE GAME
 ====================== */
+function playSound(freq, duration){
+
+    const audioCtx =
+        new (window.AudioContext ||
+             window.webkitAudioContext)();
+
+    const oscillator =
+        audioCtx.createOscillator();
+
+    const gain =
+        audioCtx.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    oscillator.frequency.value = freq;
+
+    oscillator.type = "square";
+
+    oscillator.start();
+
+    gain.gain.setValueAtTime(
+        0.05,
+        audioCtx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioCtx.currentTime +
+        duration/1000
+    );
+
+    oscillator.stop(
+        audioCtx.currentTime +
+        duration/1000
+    );
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const snakeTrigger =
@@ -214,10 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (let i = 0; i < snake.length; i++) {
 
-            if (
-                head.x === snake[i].x &&
-                head.y === snake[i].y
-            ) {
+            if (head.x === snake[i].x &&head.y === snake[i].y ) {
                 gameOver();
                 return;
             }
@@ -225,11 +260,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         snake.unshift(head);
 
-        if (
-            head.x === food.x &&
-            head.y === food.y
-        ) {
-
+        if (head.x === food.x &&head.y === food.y) {
+            playSound(800,80);
             score++;
 
             scoreDisplay.textContent =
@@ -246,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function gameOver() {
-
+        playSound(120,500);
         clearInterval(interval);
 
         gameRunning = false;
@@ -298,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     upBtn.addEventListener("click",()=>{
-
+        playSound(400,50);
         if(velocityY!==1){
 
             velocityX=0;
@@ -307,7 +339,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     downBtn.addEventListener("click",()=>{
-
+        playSound(400,50);
         if(velocityY!==-1){
 
             velocityX=0;
@@ -316,7 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     leftBtn.addEventListener("click",()=>{
-
+        playSound(400,50);
         if(velocityX!==1){
 
             velocityX=-1;
@@ -325,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     rightBtn.addEventListener("click",()=>{
-
+        playSound(400,50);
         if(velocityX!==-1){
 
             velocityX=1;
@@ -351,7 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             case "arrowup":
             case "w":
-
+                playSound(400,50);
                 if (velocityY !== 1) {
                     velocityX = 0;
                     velocityY = -1;
@@ -360,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             case "arrowdown":
             case "s":
-
+                playSound(400,50);
                 if (velocityY !== -1) {
                     velocityX = 0;
                     velocityY = 1;
@@ -369,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             case "arrowleft":
             case "a":
-
+                playSound(400,50);
                 if (velocityX !== 1) {
                     velocityX = -1;
                     velocityY = 0;
@@ -378,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             case "arrowright":
             case "d":
-
+                playSound(400,50);
                 if (velocityX !== -1) {
                     velocityX = 1;
                     velocityY = 0;
@@ -387,3 +419,181 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// Toggle
+const themeToggle =
+    document.getElementById("themeToggle");
+
+const savedTheme =
+    localStorage.getItem("theme");
+
+if(savedTheme==="dark"){
+
+    document.body.classList.add(
+        "dark"
+    );
+}
+
+themeToggle.addEventListener(
+    "click",
+    ()=>{
+
+        document.body.classList.toggle(
+            "dark"
+        );
+
+        localStorage.setItem(
+            "theme",
+            document.body.classList.contains(
+                "dark"
+            )
+            ? "dark"
+            : "light"
+        );
+    }
+);
+
+/* =====================================
+   Easter Egg 1 — Tab Title Change
+===================================== */
+
+const originalTitle = document.title;
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        if(document.hidden){
+
+            document.title =
+                "come back 👀";
+
+        }else{
+
+            document.title =
+                originalTitle;
+        }
+    }
+);
+
+/* =====================================
+   Easter Egg 2 — Idle Cursor
+===================================== */
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const IDLE_TIMEOUT = 10000;
+    
+    let idleTimer;
+    let lastX = window.innerWidth / 2;
+    let lastY = window.innerHeight / 2;
+    
+    const idleCursor =
+        document.getElementById(
+            "idle-cursor"
+        );
+    
+    if(!idleCursor){
+    
+        console.error(
+            "idle-cursor not found"
+        );
+    }
+    
+    function enterIdle(){
+
+        document.body.classList.add(
+            "idle"
+        );
+
+        idleCursor.style.display =
+            "block";
+
+        document.body.style.cursor =
+            "none";
+    }
+    
+    function exitIdle(){
+
+        document.body.classList.remove(
+            "idle"
+        );
+
+        idleCursor.style.display =
+            "none";
+
+        document.body.style.cursor =
+            "";
+    }
+    
+    function resetIdle(){
+    
+        exitIdle();
+    
+        clearTimeout(idleTimer);
+    
+        idleTimer = setTimeout(
+            enterIdle,
+            IDLE_TIMEOUT
+        );
+    }
+    
+    document.addEventListener(
+        "mousemove",
+        (e)=>{
+    
+            lastX = e.clientX;
+            lastY = e.clientY;
+    
+            resetIdle();
+        }
+    );
+    
+    document.addEventListener(
+        "touchstart",
+        resetIdle
+    );
+    
+    document.addEventListener(
+        "touchmove",
+        resetIdle
+    );
+    
+    resetIdle();
+});
+
+/* =====================================
+   Easter Egg 3 — Late Night Toast
+===================================== */
+
+const currentHour =
+    new Date().getHours();
+
+const nightToast =
+    document.getElementById(
+        "night-toast"
+    );
+
+if(
+    currentHour >= 23 ||
+    currentHour <= 4
+){
+
+    setTimeout(()=>{
+
+        if(!nightToast) return;
+
+        nightToast.classList.add(
+            "show"
+        );
+
+        setTimeout(()=>{
+
+            nightToast.classList.remove(
+                "show"
+            );
+
+        },4000);
+
+    },2000);
+}

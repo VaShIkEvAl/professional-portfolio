@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
+    <title>KV's Portfolio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +33,10 @@
             <a href="#resume">RESUME</a>
             <a href="#contact">CONTACT</a>
         </div>
+
+        <button id="themeToggle" class="theme-toggle">
+            ◐
+        </button>
 
         <span class="nav-dot pulse-dot">•</span>
     </nav>
@@ -116,6 +120,7 @@
 
                 <div class="project-card">
                     <span class="project-number">01</span>
+                    <span class="project-arrow">↗</span>
 
                     <h3>Portfolio Website</h3>
 
@@ -137,6 +142,7 @@
 
                 <div class="project-card">
                     <span class="project-number">02</span>
+                    <span class="project-arrow">↗</span>
 
                     <h3>Product Analytics Dashboard</h3>
 
@@ -158,6 +164,7 @@
 
                 <div class="project-card">
                     <span class="project-number">03</span>
+                    <span class="project-arrow">↗</span>
 
                     <h3>ML Prediction System</h3>
 
@@ -179,6 +186,7 @@
 
                 <div class="project-card">
                     <span class="project-number">04</span>
+                    <span class="project-arrow">↗</span>
 
                     <h3>Task Management Platform</h3>
 
@@ -242,30 +250,66 @@
         <section id="contact" class="section fade-in">
             <div class="divider"></div>
 
-            <p class="section-label">CONTACT</p>
+            <p class="section-label">
+                CONTACT
+            </p>
 
             <h2 class="contact-title">
                 LET'S CONNECT
             </h2>
 
-            <div class="contact-buttons">
+            <div class="contact-grid">
 
-                <a href="mailto:your@email.com"
-                class="contact-btn">
-                📧 EMAIL
-                </a>
+                <div class="contact-card">
 
-                <a href="#"
-                class="contact-btn">
-                💼 LINKEDIN
-                </a>
+                    <span class="contact-label">
+                        EMAIL
+                    </span>
 
-                <a href="#"
-                class="contact-btn">
-                💻 GITHUB
-                </a>
+                    <a href="mailto:vashikeval58@gmail.com">
+                        vashikeval58@gmail.com
+                    </a>
+
+                </div>
+
+                <div class="contact-card">
+
+                    <span class="contact-label">
+                        PHONE
+                    </span>
+
+                    <a href="tel:+917096209770">
+                        +91 7096209770
+                    </a>
+
+                </div>
+
+                <div class="contact-card">
+
+                    <span class="contact-label">
+                        LINKEDIN
+                    </span>
+
+                    <a href="https://www.linkedin.com/in/keval-vashi-96a647203/" target="_blank">
+                        linkedin
+                    </a>
+
+                </div>
+
+                <div class="contact-card">
+
+                    <span class="contact-label">
+                        GITHUB
+                    </span>
+
+                    <a href="https://github.com/VaShIkEvAl" target="_blank">
+                        github.com/kevalvashi
+                    </a>
+
+                </div>
 
             </div>
+
         </section>
 
     </main>
@@ -331,6 +375,16 @@
 
         </div>
 
+    </div>
+
+    <!-- Easter Egg 2 -->
+    <div id="idle-cursor">
+        > awaiting input_
+    </div>
+
+    <!-- Easter Egg 3 -->
+    <div id="night-toast">
+        burning the midnight oil? 🌙
     </div>
 </body>
 </html>
