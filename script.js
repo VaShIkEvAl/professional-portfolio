@@ -568,6 +568,9 @@ document.addEventListener("DOMContentLoaded", () => {
 ===================================== */
 document.addEventListener("DOMContentLoaded", () => {
 
+    const currentHour =
+        new Date().getHours();
+
     const nightToast =
         document.getElementById("night-toast");
 
