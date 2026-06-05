@@ -16,9 +16,10 @@ document.querySelectorAll(".fade-in").forEach((el) => {
 });
 
 const roles = [
-    "Software Engineer",
-    "Aspiring Product Manager",
-    "ML Enthusiast"
+    "M.Tech ICT Student",
+    "Backend Developer",
+    "Machine Learning Researcher",
+    "Aspiring Product Manager"
 ];
 
 const roleElement = document.getElementById("changing-role");
@@ -41,7 +42,7 @@ setInterval(() => {
 
 }, 2500);
 
-document.querySelectorAll(".project-card, .skill-card").forEach(card => {
+document.querySelectorAll(".project-card, .skill-card, .about-box").forEach(card => {
 
     card.addEventListener("mousemove", e => {
 
@@ -565,35 +566,62 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =====================================
    Easter Egg 3 — Late Night Toast
 ===================================== */
+document.addEventListener("DOMContentLoaded", () => {
 
-const currentHour =
-    new Date().getHours();
+    const nightToast =
+        document.getElementById("night-toast");
 
-const nightToast =
-    document.getElementById(
-        "night-toast"
-    );
+    const messages = [
+        "> developer_mode: active 🌙",
+        "> sleep.exe not responding",
+        "> caffeine detected ☕",
+        "> still debugging at midnight?",
+        "> productivity boost enabled"
+    ];
 
-if(
-    currentHour >= 23 ||
-    currentHour <= 4
-){
+    if(currentHour >= 23 || currentHour <= 4){
+    // if(true){
+        setTimeout(() => {
 
-    setTimeout(()=>{
+            if(!nightToast) return;
 
-        if(!nightToast) return;
+            const message =
+                messages[
+                    Math.floor(
+                        Math.random() *
+                        messages.length
+                    )
+                ];
 
-        nightToast.classList.add(
-            "show"
-        );
+            nightToast.textContent = "";
 
-        setTimeout(()=>{
+            nightToast.classList.add("show");
 
-            nightToast.classList.remove(
-                "show"
-            );
+            let i = 0;
 
-        },4000);
+            const typing = setInterval(() => {
 
-    },2000);
-}
+                nightToast.textContent +=
+                    message.charAt(i);
+
+                i++;
+
+                if(i >= message.length){
+
+                    clearInterval(typing);
+                }
+
+            },40);
+
+            setTimeout(() => {
+
+                nightToast.classList.remove(
+                    "show"
+                );
+
+            },5000);
+
+        },2000);
+    }
+
+});
